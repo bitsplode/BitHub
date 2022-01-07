@@ -1,6 +1,10 @@
+local blacklist = loadstring(game:HttpGet("https://raw.githubusercontent.com/bitsplode/BitHub/main/blacklist", true))()
 local whitelist = {}
 
 function whitelist:decryptKey(key)
+	if table.find(blacklist, key) then
+		return "BlacklistedKey"
+	end
 	local packet = {
 		["ckt7LS"] = 1;
 		["3R2hCR"] = 2;
