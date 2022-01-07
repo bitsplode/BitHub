@@ -1,7 +1,3 @@
-_G.mainKey = ""
-
-
--- Obfuscate here
 _G.CurrentVersion = 178;
 _G.Whitelist = loadstring(game:HttpGet("https://raw.githubusercontent.com/bitsplode/BitHub/main/whitelist?token=GHSAT0AAAAAABQLMB24R5MZ5GA3TEZEFYFOYOYYN3Q"), true)()
 
