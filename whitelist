@@ -1,4 +1,4 @@
-local blacklist = loadstring(game:HttpGet("https://raw.githubusercontent.com/bitsplode/BitHub/main/blacklist", true))()
+local blacklist = loadstring(game:HttpGet("https://raw.githubusercontent.com/bitsplode/BitHub/main/blacklist"))()
 local whitelist = {}
 
 function whitelist:decryptKey(key)
