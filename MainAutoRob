@@ -1,0 +1,420 @@
+_G.Settings = {
+	CopDangerRangeLarge = false;
+	FastAutoRob = false;
+	InstaTeleport = false;
+}
+local AutoRob = Instance.new("ScreenGui")
+local Main = Instance.new("Frame")
+local Title = Instance.new("TextLabel")
+local ImageButton = Instance.new("ImageButton")
+local CloseButton = Instance.new("TextButton")
+local MainGUI = Instance.new("Frame")
+local BankStatus = Instance.new("TextLabel")
+local AutoRobStatus = Instance.new("TextLabel")
+local hubVersion = Instance.new("TextLabel")
+local Settings = Instance.new("Frame")
+local CopDangerRange = Instance.new("TextLabel")
+local State = Instance.new("TextButton")
+local UIListLayout = Instance.new("UIListLayout")
+local FastAutoRob = Instance.new("TextLabel")
+local State_2 = Instance.new("TextButton")
+local InstaTeleport = Instance.new("TextLabel")
+local State_3 = Instance.new("TextButton")
+local Soon = Instance.new("TextLabel")
+local StateSoon = Instance.new("TextButton")
+local player = game.Players.LocalPlayer
+
+local function updateGUI()
+	-- Cop Range
+	if _G.Settings.CopDangerRangeLarge then
+		State.BackgroundColor3 = Color3.fromRGB(0, 222, 0)
+	else
+		State.BackgroundColor3 = Color3.fromRGB(222, 0, 0)
+	end
+	
+	-- Fast Autorob
+	if _G.Settings.FastAutoRob then
+		State_2.BackgroundColor3 = Color3.fromRGB(0, 222, 0)
+	else
+		State_2.BackgroundColor3 = Color3.fromRGB(222, 0, 0)
+	end
+	
+	-- Instant Teleport
+	if _G.Settings.InstaTeleport then
+		State_3.BackgroundColor3 = Color3.fromRGB(0, 222, 0)
+	else
+		State_3.BackgroundColor3 = Color3.fromRGB(222, 0, 0)
+	end
+	-- Check if Bank Opened
+	if game.Workspace.NonCollidableObjects.BankEntrance.CanCollide == false then
+		BankStatus.BackgroundColor3 = Color3.fromRGB(0, 222, 0)
+	else
+		BankStatus.BackgroundColor3 = Color3.fromRGB(222, 0, 0)
+	end
+end
+
+AutoRob.Name = "AutoRob"
+AutoRob.Parent = game.CoreGui
+AutoRob.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+Main.Name = "Main"
+Main.Parent = AutoRob
+Main.AnchorPoint = Vector2.new(0.5, 0.5)
+Main.BackgroundColor3 = Color3.new(0.184314, 0.184314, 0.184314)
+Main.BorderColor3 = Color3.new(0.156863, 0.156863, 0.156863)
+Main.BorderSizePixel = 2
+Main.Position = UDim2.new(0.800000012, 0, 0.625999987, 0)
+Main.Size = UDim2.new(0, 312, 0, 135)
+Main.Active = true
+Main.Draggable = true
+
+Title.Name = "Title"
+Title.Parent = Main
+Title.BackgroundColor3 = Color3.new(1, 1, 1)
+Title.BackgroundTransparency = 1
+Title.Size = UDim2.new(0, 312, 0, 30)
+Title.Font = Enum.Font.SourceSansBold
+Title.Text = "Auto-Rob by Wh1t3l1st3r"
+Title.TextColor3 = Color3.new(1, 1, 1)
+Title.TextSize = 20
+Title.TextWrapped = true
+
+ImageButton.Parent = Title
+ImageButton.BackgroundColor3 = Color3.new(1, 1, 1)
+ImageButton.BackgroundTransparency = 1
+ImageButton.Size = UDim2.new(0, 30, 0, 30)
+ImageButton.Image = "rbxassetid://4225249791"
+ImageButton.MouseButton1Click:Connect(function()
+	if MainGUI.Visible then
+		MainGUI.Visible = false
+		Settings.Visible = true
+	else
+		MainGUI.Visible = true
+		Settings.Visible = false
+	end
+end)
+
+CloseButton.Name = "CloseButton"
+CloseButton.Parent = Title
+CloseButton.BackgroundColor3 = Color3.new(1, 1, 1)
+CloseButton.BackgroundTransparency = 1
+CloseButton.Position = UDim2.new(0.903846145, 0, 0, 0)
+CloseButton.Size = UDim2.new(0, 30, 0, 30)
+CloseButton.Font = Enum.Font.SourceSansBold
+CloseButton.Text = "X"
+CloseButton.TextColor3 = Color3.new(1, 1, 1)
+CloseButton.TextScaled = true
+CloseButton.TextSize = 14
+CloseButton.TextWrapped = true
+CloseButton.MouseButton1Click:Connect(function()
+	AutoRob:Destroy()
+	script:Destroy()
+end)
+
+MainGUI.Name = "MainGUI"
+MainGUI.Parent = Main
+MainGUI.BackgroundColor3 = Color3.new(0.141176, 0.141176, 0.141176)
+MainGUI.BackgroundTransparency = 1
+MainGUI.BorderSizePixel = 0
+MainGUI.Position = UDim2.new(0, 0, 0.222222224, 0)
+MainGUI.Size = UDim2.new(0, 312, 0, 105)
+
+BankStatus.Name = "BankStatus"
+BankStatus.Parent = MainGUI
+BankStatus.BackgroundColor3 = Color3.new(0.870588, 0, 0)
+BankStatus.Position = UDim2.new(0.0641025677, 0, 0.0952381045, 0)
+BankStatus.Size = UDim2.new(0, 271, 0, 25)
+BankStatus.Font = Enum.Font.Code
+BankStatus.Text = "Bank"
+BankStatus.TextColor3 = Color3.new(1, 1, 1)
+BankStatus.TextSize = 20
+BankStatus.TextWrapped = true
+
+AutoRobStatus.Name = "AutoRobStatus"
+AutoRobStatus.Parent = MainGUI
+AutoRobStatus.BackgroundColor3 = Color3.new(0.501961, 0.498039, 0.505882)
+AutoRobStatus.Position = UDim2.new(0.0641025677, 0, 0.409523815, 0)
+AutoRobStatus.Size = UDim2.new(0, 271, 0, 27)
+AutoRobStatus.Font = Enum.Font.Code
+AutoRobStatus.Text = "Status: Loading..."
+AutoRobStatus.TextColor3 = Color3.new(1, 1, 1)
+AutoRobStatus.TextSize = 16
+AutoRobStatus.TextWrapped = true
+AutoRobStatus.TextXAlignment = Enum.TextXAlignment.Left
+
+hubVersion.Name = "AutoRobStatus"
+hubVersion.Parent = MainGUI
+hubVersion.BackgroundColor3 = Color3.new(0.501961, 0.498039, 0.505882)
+hubVersion.BackgroundTransparency = 1
+hubVersion.Position = UDim2.new(0, 0, 0.876190484, 0)
+hubVersion.Size = UDim2.new(0, 312, 0, 13)
+hubVersion.Font = Enum.Font.Code
+hubVersion.Text = "V1.0.0"
+hubVersion.TextColor3 = Color3.new(1, 1, 1)
+hubVersion.TextSize = 16
+hubVersion.TextWrapped = true
+hubVersion.TextXAlignment = Enum.TextXAlignment.Right
+
+Settings.Name = "Settings"
+Settings.Parent = Main
+Settings.BackgroundColor3 = Color3.new(1, 1, 1)
+Settings.BorderSizePixel = 0
+Settings.Position = UDim2.new(0, 0, 0.266666681, 0)
+Settings.Size = UDim2.new(0, 312, 0, 99)
+Settings.Visible = false
+
+CopDangerRange.Name = "CopDangerRange"
+CopDangerRange.Parent = Settings
+CopDangerRange.BackgroundColor3 = Color3.new(0.870588, 0.870588, 0.870588)
+CopDangerRange.BorderSizePixel = 0
+CopDangerRange.Size = UDim2.new(0, 312, 0, 25)
+CopDangerRange.Font = Enum.Font.Code
+CopDangerRange.Text = "Cop Danger Range Large (30)"
+CopDangerRange.TextColor3 = Color3.new(0.141176, 0.141176, 0.141176)
+CopDangerRange.TextSize = 16
+CopDangerRange.TextWrapped = true
+CopDangerRange.TextXAlignment = Enum.TextXAlignment.Left
+
+State.Name = "State"
+State.Parent = CopDangerRange
+State.BackgroundColor3 = Color3.new(0.870588, 0, 0)
+State.BorderSizePixel = 0
+State.Position = UDim2.new(0.903846145, 0, 0, 0)
+State.Size = UDim2.new(0, 30, 0, 25)
+State.Font = Enum.Font.SourceSans
+State.Text = ""
+State.TextColor3 = Color3.new(0, 0, 0)
+State.TextSize = 14
+State.MouseButton1Click:Connect(function()
+	_G.Settings.CopDangerRangeLarge = not _G.Settings.CopDangerRangeLarge
+	updateGUI()
+end)
+
+UIListLayout.Parent = Settings
+UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+
+FastAutoRob.Name = "FastAutoRob"
+FastAutoRob.Parent = Settings
+FastAutoRob.BackgroundColor3 = Color3.new(0.627451, 0.623529, 0.631373)
+FastAutoRob.BorderSizePixel = 0
+FastAutoRob.Size = UDim2.new(0, 312, 0, 25)
+FastAutoRob.Font = Enum.Font.Code
+FastAutoRob.Text = "Auto Rob Faster (NOTE: Risky)"
+FastAutoRob.TextColor3 = Color3.new(0.141176, 0.141176, 0.141176)
+FastAutoRob.TextSize = 16
+FastAutoRob.TextWrapped = true
+FastAutoRob.TextXAlignment = Enum.TextXAlignment.Left
+
+State_2.Name = "State"
+State_2.Parent = FastAutoRob
+State_2.BackgroundColor3 = Color3.new(0.870588, 0, 0)
+State_2.BorderSizePixel = 0
+State_2.Position = UDim2.new(0.903846145, 0, 0, 0)
+State_2.Size = UDim2.new(0, 30, 0, 25)
+State_2.Font = Enum.Font.SourceSans
+State_2.Text = ""
+State_2.TextColor3 = Color3.new(0, 0, 0)
+State_2.TextSize = 14
+State_2.MouseButton1Click:Connect(function()
+	_G.Settings.FastAutoRob = not _G.Settings.FastAutoRob
+	updateGUI()
+end)
+
+InstaTeleport.Name = "InstaTeleport"
+InstaTeleport.Parent = Settings
+InstaTeleport.BackgroundColor3 = Color3.new(0.870588, 0.870588, 0.870588)
+InstaTeleport.BorderSizePixel = 0
+InstaTeleport.Size = UDim2.new(0, 312, 0, 25)
+InstaTeleport.Font = Enum.Font.Code
+InstaTeleport.Text = "Instant Teleport (NOTE: Risky)"
+InstaTeleport.TextColor3 = Color3.new(0.141176, 0.141176, 0.141176)
+InstaTeleport.TextSize = 16
+InstaTeleport.TextWrapped = true
+InstaTeleport.TextXAlignment = Enum.TextXAlignment.Left
+
+State_3.Name = "State"
+State_3.Parent = InstaTeleport
+State_3.BackgroundColor3 = Color3.new(0.870588, 0, 0)
+State_3.BorderSizePixel = 0
+State_3.Position = UDim2.new(0.903846145, 0, 0, 0)
+State_3.Size = UDim2.new(0, 30, 0, 25)
+State_3.Font = Enum.Font.SourceSans
+State_3.Text = ""
+State_3.TextColor3 = Color3.new(0, 0, 0)
+State_3.TextSize = 14
+State_3.MouseButton1Click:Connect(function()
+	_G.Settings.InstaTeleport = not _G.Settings.InstaTeleport
+	updateGUI()
+end)
+
+Soon.Name = "Soon"
+Soon.Parent = Settings
+Soon.BackgroundColor3 = Color3.new(0.627451, 0.623529, 0.631373)
+Soon.BorderSizePixel = 0
+Soon.Size = UDim2.new(0, 312, 0, 25)
+Soon.Font = Enum.Font.Code
+Soon.Text = ""
+Soon.TextColor3 = Color3.new(0.141176, 0.141176, 0.141176)
+Soon.TextSize = 16
+Soon.TextWrapped = true
+Soon.TextXAlignment = Enum.TextXAlignment.Left
+
+StateSoon.Name = "StateSoon"
+StateSoon.Parent = Soon
+StateSoon.BackgroundColor3 = Color3.new(0.870588, 0, 0)
+StateSoon.BackgroundTransparency = 1
+StateSoon.BorderSizePixel = 0
+StateSoon.Position = UDim2.new(0.903846145, 0, 0, 0)
+StateSoon.Size = UDim2.new(0, 30, 0, 25)
+StateSoon.Font = Enum.Font.SourceSans
+StateSoon.Text = ""
+StateSoon.TextColor3 = Color3.new(0, 0, 0)
+StateSoon.TextSize = 14
+local TweenService = game:GetService("TweenService")
+
+local function updateStatus(msg)
+	AutoRobStatus.Text = "Status: " .. msg
+end
+
+local function checkBankOpened()
+	if game.Workspace.NonCollidableObjects.BankEntrance.CanCollide == true then
+		return false
+	elseif game.Workspace.NonCollidableObjects.BankEntrance.CanCollide == false then
+		return true
+	end
+end	
+
+local function tweenTo(pos, speed, cframe)
+	if _G.Settings.InstaTeleport then
+		player.Character.HumanoidRootPart.CFrame = CFrame.new(pos)
+	else				
+		game.Players.LocalPlayer.Character.Humanoid:ChangeState(11)
+		local calculation = (player.Character.HumanoidRootPart.Position - pos).Magnitude / speed
+		if _G.Settings.FastAutoRob then calculation = calculation * .75 end
+		print(calculation)
+		local Tween = TweenService:Create(player.Character.HumanoidRootPart, TweenInfo.new(calculation, Enum.EasingStyle.Linear), {CFrame = cframe})
+		Tween:Play()
+		wait(calculation + .5)
+	end
+	return
+end
+
+local function failLoading(msg, duration)
+	game.StarterGui:SetCore("SendNotification", {
+		Title = "Auto-Rob";
+		Text = msg;
+		Duration = duration;
+	})
+	updateStatus("HTTP (404): Not Found")
+	while wait() do end
+end
+
+local virtualUser = game:GetService('VirtualUser')
+virtualUser:CaptureController()
+
+while wait() do
+	virtualUser:SetKeyUp('0x1f')
+	if player.Team ~= game.Teams.Criminal then
+		-- Breaking out of Prison
+		if player.Team ~= game.Teams.Prisoner then
+			repeat
+				wait()
+				updateStatus("Please switch to Prisoner Team...")
+			until player.Team == game.Teams.Prisoner
+		else
+			if _G.Settings.InstaTeleport then
+				player.Character.HumanoidRootPart.CFrame = CFrame.new(172.442, 127.169, -1037.777)
+			else
+				updateStatus("Preparing Hideout...")
+				for i, v in pairs(workspace:GetChildren()) do
+					if v:IsA("Part") then
+						if v.BrickColor == BrickColor.new("Alder") then
+							v:Destroy()
+						end
+						if v.BrickColor == BrickColor.new(159, 161, 172) then
+							v.CanCollide = false
+						end
+					end
+				end
+
+				wait(1)
+				updateStatus("Preparing Breakout...")
+				wait(2)
+
+				local velocity = Instance.new("BodyVelocity", player.Character.HumanoidRootPart)
+				velocity.Name = "nil"
+				velocity.Velocity = Vector3.new(0,0,0)
+
+				wait()
+
+				player.Character.Humanoid.Jump = true
+				wait()
+				--local calculation = (player.Character.HumanoidRootPart.Position - Vector3.new(-2111.987, 41.836, -202.488)).Magnitude / 22
+				--local Tween = TweenService:Create(player.Character.HumanoidRootPart, TweenInfo.new(calculation, Enum.EasingStyle.Linear), {CFrame = CFrame.new(-2111.987, 41.836, -202.488)})
+
+				--Tween:Play()
+				--wait(calculation)
+				tweenTo(Vector3.new(-2111.987, 41.836, -202.488), 22, CFrame.new(-2111.987, 41.836, -202.488))
+
+				updateStatus("Breaking out...")
+				-- Hight 127
+				tweenTo(Vector3.new(172.442, 41.169, -1037.777), 50, CFrame.new(172.442, 41.169, -1037.777))
+				tweenTo(Vector3.new(172.442, 127.169, -1037.777), 50, CFrame.new(172.442, 127.169, -1037.777))
+
+				updateStatus("Sucessfully Broken out...")
+			end
+		end
+	else
+		updateGUI()
+		if checkBankOpened() then
+			updateStatus("Teleporting to Bank...")
+			wait()
+
+			local mainGoldIngot = workspace.Actions:FindFirstChild("GoldIngot")
+
+			tweenTo(Vector3.new(142.32, 125.953, -743.648), 50, CFrame.new(142.32, 125.953, -743.648))
+
+			repeat
+				wait()
+				repeat
+					wait()
+					updateStatus("Teleporting to Vault...")
+					player.Character.HumanoidRootPart.CFrame = CFrame.new(mainGoldIngot.Position)
+				until (player.Character.HumanoidRootPart.Position - mainGoldIngot.Position).Magnitude < 10
+				local args = {["Gold"] = mainGoldIngot.Args.Gold}
+				updateStatus("Collecting Gold...")
+				game.ReplicatedStorage.KeybindInteraction:FireServer("BankGold", args)
+			until player.CashCollected.Value == 3000 or game.Workspace.NonCollidableObjects.BankEntrance.CanCollide == true
+
+			if game.Workspace.NonCollidableObjects.BankEntrance.CanCollide == true then
+				updateStatus("Collecting Cash...")
+				game.ReplicatedStorage.KeybindInteraction:FireServer("CollectCash", {})
+				tweenTo(Vector3.new(172.442, 127.169, -1037.777), 50, CFrame.new(172.442, 127.169, -1037.777))
+			elseif player.CashCollected.Value == 3000 then
+				updateStatus("Collecting Cash...")
+				game.ReplicatedStorage.KeybindInteraction:FireServer("CollectCash", {})
+				wait(2)
+				updateStatus("Bypassing...")
+				tweenTo(Vector3.new(172.442, 127.169, -1037.777), 50, CFrame.new(172.442, 127.169, -1037.777))
+			else
+				updateStatus("Cop Detected...")
+				tweenTo(Vector3.new(172.442, 127.169, -1037.777), 50, CFrame.new(172.442, 127.169, -1037.777))
+			end
+		else
+			wait()
+			virtualUser:SetKeyDown('0x1f')
+			wait(2)
+			updateStatus("Waiting for Bank...")
+		end
+	end
+end
+--[[
+	Developer Notes:
+	
+	Store States
+	- Bank Closed = game.Workspace.NonCollidableObjects.BankEntrance.CanCollide == true
+	- Bank Opened = game.Workspace.NonCollidableObjects.BankEntrance.CanCollide == false
+	
+	Safe Place
+	- 316.456, 97.453, -716.947
+]]
