@@ -1,0 +1,35 @@
+local whitelist = {}
+
+local function decryptKey(key)
+	local packet = {
+		["ckt7LS"] = 1;
+		["3R2hCR"] = 2;
+		["UC9mGv"] = 3;
+		["8sWA3B"] = 4;
+		["T85bAV"] = 5;
+		["kN7hYv"] = 6;
+		["XGPs6D"] = 7;
+		["YSf3q5"] = 8;
+		["kY6YdK"] = 9;
+		["nY6TKJ"] = 0;
+	}
+	local ostime
+	for i = 0,#key,6 do
+		if packet[key:sub(i - 5, i)] then
+			if ostime then
+				ostime = ostime .. packet[key:sub(i - 5, i)]
+			else
+				ostime = packet[key:sub(i - 5, i)]
+			end
+		end
+	end
+	print(ostime, os.time())
+	if tonumber(ostime) < os.time() and tonumber(ostime) ~= nil then
+		return "AccessGranted"
+	else
+		return "InvalidKey"
+	end
+end
+--decryptKey(_G.mainKey)
+
+return whitelist
