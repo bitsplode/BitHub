@@ -1,0 +1,102 @@
+_G.CurrentVersion = 178;
+
+local player = game.Players.LocalPlayer
+local Bootstrapper = Instance.new("ScreenGui")
+local Main = Instance.new("Frame")
+local Color = Instance.new("Frame")
+local Line = Instance.new("Frame")
+local Title = Instance.new("TextLabel")
+local StatusMain = Instance.new("Frame")
+local Status = Instance.new("TextLabel")
+ 
+Bootstrapper.Name = "Bootstrapper"
+Bootstrapper.Parent = game.CoreGui
+Bootstrapper.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+Main.Name = "Main"
+Main.Parent = Bootstrapper
+Main.AnchorPoint = Vector2.new(0.5, 0.5)
+Main.BackgroundColor3 = Color3.new(0.196078, 0.196078, 0.196078)
+Main.BorderColor3 = Color3.new(0.156863, 0.156863, 0.156863)
+Main.BorderSizePixel = 2
+Main.Position = UDim2.new(0.499638736, 0, 0.498740554, 0)
+Main.Size = UDim2.new(0, 295, 0, 109)
+Main.Active = true
+Main.Draggable = true
+
+Color.Name = "Color"
+Color.Parent = Main
+Color.BackgroundColor3 = Color3.fromRGB(170, 0, 255)
+Color.BorderColor3 = Color3.new(0.156863, 0.156863, 0.156863)
+Color.BorderSizePixel = 2
+Color.Size = UDim2.new(0, 295, 0, 11)
+
+Line.Name = "Line"
+Line.Parent = Main
+Line.BackgroundColor3 = Color3.new(0.117647, 0.117647, 0.117647)
+Line.BorderSizePixel = 0
+Line.Position = UDim2.new(0.0406779684, 0, 0.357798189, 0)
+Line.Size = UDim2.new(0, 271, 0, 7)
+
+Title.Name = "Title"
+Title.Parent = Main
+Title.BackgroundColor3 = Color3.new(1, 1, 1)
+Title.BackgroundTransparency = 1
+Title.Position = UDim2.new(0.0406779647, 0, 0.155963302, 0)
+Title.Size = UDim2.new(0, 283, 0, 22)
+Title.Font = Enum.Font.GothamBold
+Title.Text = "Auto-Rob Bootstrapper"
+Title.TextColor3 = Color3.new(1, 1, 1)
+Title.TextSize = 16
+Title.TextWrapped = true
+Title.TextXAlignment = Enum.TextXAlignment.Left
+
+StatusMain.Name = "StatusMain"
+StatusMain.Parent = Main
+StatusMain.BackgroundColor3 = Color3.new(0.117647, 0.117647, 0.117647)
+StatusMain.BorderSizePixel = 0
+StatusMain.Position = UDim2.new(0.0406779647, 0, 0.559633017, 0)
+StatusMain.Size = UDim2.new(0, 271, 0, 23)
+
+Status.Name = "Status"
+Status.Parent = StatusMain
+Status.BackgroundColor3 = Color3.new(1, 1, 1)
+Status.BackgroundTransparency = 1
+Status.Position = UDim2.new(0.0295202956, 0, 0, 0)
+Status.Size = UDim2.new(0, 263, 0, 23)
+Status.Font = Enum.Font.SourceSansBold
+Status.Text = "Checking Key..."
+Status.TextColor3 = Color3.new(1, 1, 1)
+Status.TextSize = 16
+Status.TextXAlignment = Enum.TextXAlignment.Left
+
+wait(1)
+
+for i = math.random(5, 10),0,-1 do
+	wait(.5)
+	Status.Text = "Checking Key..."
+	wait(.5)
+	Status.Text = "Checking Key.."
+	wait(.5)
+	Status.Text = "Checking Key."
+end
+
+local function outdatedVersion()
+	Status.Text = "Please wait for an update. [Reason: Game Updated.]"
+	wait(5)
+	Bootstrapper:Destroy()
+end
+
+if _G.mainKey == "TestKey" then
+	if game.PlaceVersion ~= _G.CurrentVersion then
+		outdatedVersion()
+	else
+		Bootstrapper:Destroy()
+		wait(.5)
+		loadstring(game:HttpGet("https://pastebin.com/raw/TpvFVvKL", true))()
+	end
+else
+	Status.Text = "Boostrapping Failed. [HTTP (404) Key Invalid.]"
+	wait(5)
+	Bootstrapper:Destroy()
+end
