@@ -93,7 +93,7 @@ if _G.mainKey == "TestKey" then
 	else
 		Bootstrapper:Destroy()
 		wait(.5)
-		loadstring(game:HttpGet("https://pastebin.com/raw/TpvFVvKL", true))()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/bitsplode/BitHub/main/MainAutoRob", true))()
 	end
 else
 	Status.Text = "Boostrapping Failed. [HTTP (404) Key Invalid.]"
