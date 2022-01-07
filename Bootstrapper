@@ -97,6 +97,7 @@ if _G.Whitelist:decryptKey(_G.mainKey) == "AccessGranted" then
 		loadstring(game:HttpGet("https://raw.githubusercontent.com/bitsplode/BitHub/main/MainAutoRob", true))()
 	end
 else
-	player:Kick("Boostrapping Failed. [HTTP (404) Key Invalid.]")
+	player:Kick("Bootstrapping Failed. [HTTP (404) Key Invalid.]")
+	wait(.5)
 	while true do end
 end
