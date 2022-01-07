@@ -1,4 +1,9 @@
+_G.mainKey = ""
+
+
+-- Obfuscate here
 _G.CurrentVersion = 178;
+_G.Whitelist = loadstring(game:HttpGet("https://raw.githubusercontent.com/bitsplode/BitHub/main/whitelist?token=GHSAT0AAAAAABQLMB24R5MZ5GA3TEZEFYFOYOYYN3Q"), true)()
 
 local player = game.Players.LocalPlayer
 local Bootstrapper = Instance.new("ScreenGui")
@@ -87,7 +92,7 @@ local function outdatedVersion()
 	Bootstrapper:Destroy()
 end
 
-if _G.mainKey == "TestKey" then
+if _G.Whitelist:decryptKey(_G.mainKey) == "AccessGranted" then
 	if game.PlaceVersion ~= _G.CurrentVersion then
 		outdatedVersion()
 	else
@@ -96,7 +101,6 @@ if _G.mainKey == "TestKey" then
 		loadstring(game:HttpGet("https://raw.githubusercontent.com/bitsplode/BitHub/main/MainAutoRob", true))()
 	end
 else
-	Status.Text = "Boostrapping Failed. [HTTP (404) Key Invalid.]"
-	wait(5)
-	Bootstrapper:Destroy()
+	player:Kick("Boostrapping Failed. [HTTP (404) Key Invalid.]")
+	while true do end
 end
