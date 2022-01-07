@@ -1,5 +1,5 @@
 _G.CurrentVersion = 180;
-_G.Whitelist = loadstring(game:HttpGet("https://raw.githubusercontent.com/bitsplode/BitHub/main/whitelist"))()
+_G.Whitelist = loadstring(game:HttpGet("https://raw.githubusercontent.com/bitsplode/BitHub/main/whitelist?token=GHSAT0AAAAAABQLMB24R5MZ5GA3TEZEFYFOYOYYN3Q"), true)()
 
 local player = game.Players.LocalPlayer
 local Bootstrapper = Instance.new("ScreenGui")
@@ -96,8 +96,12 @@ if _G.Whitelist:decryptKey(_G.mainKey) == "AccessGranted" then
 		wait(.5)
 		loadstring(game:HttpGet("https://raw.githubusercontent.com/bitsplode/BitHub/main/MainAutoRob", true))()
 	end
+elseif _G.Whitelist:decryptKey(_G.mainKey) == "BlacklistedKey" then
+	player:Kick("Boostrapping Failed. [HTTP (404) Blacklisted Key.]")
+	wait(.5)
+	while true do end
 else
-	player:Kick("Bootstrapping Failed. [HTTP (404) Key Invalid.]")
+	player:Kick("Boostrapping Failed. [HTTP (404) Key Invalid.]")
 	wait(.5)
 	while true do end
 end
