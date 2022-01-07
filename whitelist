@@ -1,6 +1,6 @@
 local whitelist = {}
 
-local function decryptKey(key)
+function whitelist:decryptKey(key)
 	local packet = {
 		["ckt7LS"] = 1;
 		["3R2hCR"] = 2;
