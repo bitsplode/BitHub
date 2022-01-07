@@ -98,6 +98,4 @@ if _G.Whitelist:decryptKey(_G.mainKey) == "AccessGranted" then
 	end
 else
 	player:Kick("Bootstrapping Failed. [HTTP (404) Key Invalid.]")
-	wait(1)
-	while true do end
 end
