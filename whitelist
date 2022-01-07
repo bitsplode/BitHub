@@ -24,7 +24,7 @@ function whitelist:decryptKey(key)
 		end
 	end
 	print(ostime, os.time())
-	if tonumber(ostime) < os.time() and tonumber(ostime) ~= nil then
+	if ostime ~= nil and tonumber(ostime) < os.time() then
 		return "AccessGranted"
 	else
 		return "InvalidKey"
