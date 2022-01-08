@@ -1,4 +1,4 @@
-_G.CurrentVersion = 183;
+_G.CurrentVersion = 182;
 _G.Whitelist = loadstring(game:HttpGet("https://raw.githubusercontent.com/bitsplode/BitHub/main/whitelist"))()
 
 local player = game.Players.LocalPlayer
