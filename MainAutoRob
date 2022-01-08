@@ -271,6 +271,7 @@ StateSoon.Text = ""
 StateSoon.TextColor3 = Color3.new(0, 0, 0)
 StateSoon.TextSize = 14
 local TweenService = game:GetService("TweenService")
+local runService = game:GetService("RunService")
 
 local function updateStatus(msg)
 	AutoRobStatus.Text = "Status: " .. msg
@@ -311,6 +312,10 @@ end
 
 local virtualUser = game:GetService('VirtualUser')
 virtualUser:CaptureController()
+
+runService.Heartbeat:Connect(function()
+	player.Character.Humanoid.Sit = true
+end)
 
 while wait() do
 	virtualUser:SetKeyUp('0x1f')
